@@ -11,10 +11,10 @@ public class Menu {
 
 
     // 생성자
-    public Menu(int categoryNumber, String categoryName, List<MenuItem> menuItemList) {
+    public Menu(int categoryNumber, String categoryName, List<MenuItem> categoryList) {
         this.categoryNumber = categoryNumber;
         this.categoryName = categoryName;
-        this.menuItemList = menuItemList;
+        this.menuItemList = categoryList;
     }
 
     // 기능
@@ -27,11 +27,8 @@ public class Menu {
     }
 
     public List<MenuItem> getMenuItemList() {
-        return  this.menuItemList;
+        return this.menuItemList;
     }
-
-
-
 
 
     //속성
@@ -86,6 +83,4 @@ public class Menu {
 //
 //        return (MenuItem) dessertMenuList;
 //    }
-
-
 }

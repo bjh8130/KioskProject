@@ -1,5 +1,6 @@
 package lv4;
 
+import javax.lang.model.SourceVersion;
 import java.util.List;
 import java.util.Scanner;
 
@@ -8,6 +9,7 @@ public class Kiosk {
     // 속성
     private Scanner sc = new Scanner(System.in);
     private List<Menu> menuArrayList;
+    private Menu selectedMenu;
 
     // 생성자
 
@@ -16,68 +18,54 @@ public class Kiosk {
     }
     //기능
     public void start() {
-
+        // 1. 메뉴카테고리 보여주기
         while (true) {
-            // 1. 메뉴목록 띄우기
-            System.out.println("[ MAIN MENU ]");
-
-            for (Menu menuList : menuArrayList) {
-                System.out.println(menuList.getCategoryNumber() + ". " + menuList.getCategoryName());
+            System.out.println(" [ MENU LIST ] ");
+            for (Menu menu : menuArrayList) {
+                System.out.println(menu.getCategoryNumber() + ". " + menu.getCategoryName());
             }
-            System.out.print("메뉴를 선택해주세요: ");
-
-            //2. 사용자가 메뉴선택
+            System.out.println("0. 종료");
+            System.out.print("메뉴를 골라주세요: ");
+            // 2. 메뉴카테고리 중에서 사용자가 고를 메뉴카테고리번호 받기
             int menuChoice = sc.nextInt();
-            if (menuChoice == 1) {
-               Menu findmenuList = menuArrayList.get(menuChoice - 1);
-               List<MenuItem> burgerMenuItemList = findmenuList.getMenuItemList();
-                System.out.println(burgerMenuItemList.getName());
 
+            // 3. 메뉴카테고리번호에 해당하는 메뉴를 가져오기 & 출력하기
+            if (0 < menuChoice && menuChoice <= menuArrayList.size()) {
+                this.selectedMenu = menuArrayList.get(menuChoice - 1);
+                String categoryName = selectedMenu.getCategoryName();
+                System.out.println(categoryName + "을 선택하셨습니다.");
 
-            }  else if (menuChoice == 0) {
-                System.out.println("0. 종료       | 종료");
+            } else if (menuChoice == 0) {
+                System.out.println("키오스크를 종료합니다. ");
                 break;
             } else {
-                System.out.println("잘못입력하셨습니다. ");
+                System.out.println("잘못 입력하셨습니다. ");
+                // 컨티뉴
             }
+            // 4. 선택한 메뉴의 메뉴아이템리스트 보여주기
+            // (메뉴아이템번호매기기 : int자료형 변수 선언 → for반복문: 변수가 리스트크기를 초과하지 않게 반복)
+            int commend = 1;
+            for (MenuItem menuItem : selectedMenu.getMenuItemList()){
+                System.out.println(commend + ". " + menuItem.getName() + " | W "+ menuItem.getPrice() +" | "+ menuItem.getInformation());
+                commend++;
+            }
+            System.out.print("어떤 메뉴아이템을 고르시겠습니까?: ");
 
-            // 3. 선택받은 번호에 대한 메뉴찾기
+            // 5. 메뉴아이템리스트 중 원하는 메뉴아이템 선택
+            // 5-1 사용자가 입력한 메뉴아이템 번호받기
+            int menuItemChoice = sc.nextInt();
+            // 5-2 메뉴아이템리스트에 적혀있는 번호를 입력하기
+            // if종결조건 : menuItemChoice가 0보다 크고, 메뉴아이템리스트 배열크기와 같거나 작은 숫자여야 한다
+            if ( 0 < menuItemChoice && menuItemChoice <= selectedMenu.getMenuItemList().size()) {
 
+            }
+            // 6.메뉴아이템을 선택한 결과출력하기
 
-//            메뉴아이템 목록 띄우기
-//            System.out.println("         ");
-//            System.out.println("[ SHAKESHACK MENU ]");
-//
-//            int menuItemNumber = 1;
-//            for (MenuItem burgerItem : burgerMenuItemList) {
-//                System.out.println(menuItemNumber+ ". " + burgerItem.getName() + burgerItem.getPrice() + burgerItem.getInformation());
-//                menuItemNumber += 1;
-//
-//            }
-//            System.out.print("무슨 메뉴를 고르시겠습니까?: ");
-//
-//
-//            // 2. 메뉴아이템목록에서 사용자가 원하는 메뉴 선택
-//            int burgerChoice = sc.nextInt(); // 스캐너 객체 생성 -> 입력한 Int 값을 burgerChoice에 할당
-//
-//
-//            // 3. 선택한 메뉴 출력
-//            if (0 < burgerChoice && burgerChoice < 5) {
-//                MenuItem findMenuItem = burgerMenuItemList.get(burgerChoice - 1);
-//                String findMenuItemName = findMenuItem.getName();
-//                double findMenuItemPrice = findMenuItem.getPrice();
-//                String findMenuItemInformation = findMenuItem.getInformation();
-//                System.out.println(findMenuItemName + findMenuItemPrice + findMenuItemInformation);
-//
-//            }  else if (burgerChoice == 0) {
-//                System.out.println("0. 종료       | 종료");
-//                break;
-//            }
-//            else {
-//                System.out.println("잘못입력하셨습니다.");
-//            }
 
 
         }
+
+
+
     }
 }
