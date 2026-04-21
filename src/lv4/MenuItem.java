@@ -16,6 +16,7 @@ public class MenuItem {
         this.information = information;
     }
 
+    // n8n 테스트용 텍스트 블라블라
 
     //기능
     // 6. main에서 호출 시 햄버거 메뉴를 출력하는 기능구현 -> 12
